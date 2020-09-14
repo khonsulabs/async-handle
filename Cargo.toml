@@ -8,6 +8,7 @@ readme = "./README.md"
 license = "MIT"
 keywords = ["rwlock", "handle", "mutex", "lock", "asynchronous"]
 categories = ["asynchronous", "concurrency"]
+repository = "https://github.com/khonsulabs/async-handle"
 
 [dependencies]
 async-rwlock = "1"
