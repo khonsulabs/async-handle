@@ -4,7 +4,6 @@ use std::{
     sync::Arc,
 };
 
-#[derive(Clone)]
 /// Reference-counted async RwLock
 pub struct Handle<T> {
     data: Arc<RwLock<T>>,
@@ -33,6 +32,30 @@ impl<T> Handle<T> {
             Ok(lock) => Ok(lock.into_inner()),
             Err(data) => Err(Self { data }),
         }
+    }
+
+    /// Returns true if the two Handles point to the same allocation (in a vein similar to Arc::ptr_eq).
+    pub fn ptr_eq(this: &Self, other: &Self) -> bool {
+        Arc::ptr_eq(&this.data, &other.data)
+    }
+}
+
+impl<T> Clone for Handle<T> {
+    fn clone(&self) -> Self {
+        Self {
+            data: self.data.clone(),
+        }
+    }
+}
+
+impl<T> Handle<T>
+where
+    T: Clone,
+{
+    /// Returns a new Handle with a clone of the value within
+    pub async fn cloned(&self) -> Self {
+        let data = self.data.read().await;
+        Self::new(data.clone())
     }
 }
 
