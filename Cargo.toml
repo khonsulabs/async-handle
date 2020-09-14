@@ -6,14 +6,7 @@ edition = "2018"
 description = "A reference-counted async RwLock"
 readme = "./README.md"
 license = "MIT"
-keywords = [
-    "rwlock",
-    "handle",
-    "synchronization",
-    "mutex",
-    "lock",
-    "asynchronous"
-]
+keywords = ["rwlock", "handle", "mutex", "lock", "asynchronous"]
 categories = ["asynchronous", "concurrency"]
 
 [dependencies]
