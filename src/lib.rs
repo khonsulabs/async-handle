@@ -5,7 +5,7 @@ use std::{
 };
 
 /// Reference-counted async RwLock
-pub struct Handle<T> {
+pub struct Handle<T: ?Sized> {
     data: Arc<RwLock<T>>,
 }
 
