@@ -4,6 +4,10 @@ use std::{
     sync::Arc,
 };
 
+// RwLock ensures this safeness for us
+unsafe impl<T: Send + ?Sized> Send for Handle<T> {}
+unsafe impl<T: Send + Sync + ?Sized> Sync for Handle<T> {}
+
 /// Reference-counted async RwLock
 pub struct Handle<T: ?Sized> {
     data: Arc<RwLock<T>>,
