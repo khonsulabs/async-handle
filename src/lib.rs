@@ -44,7 +44,7 @@ impl<T> Handle<T> {
     }
 }
 
-impl<T> Clone for Handle<T> {
+impl<T: ?Sized> Clone for Handle<T> {
     fn clone(&self) -> Self {
         Self {
             data: self.data.clone(),
